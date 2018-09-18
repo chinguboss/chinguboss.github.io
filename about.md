@@ -14,8 +14,8 @@ sitemap:
 ### Content is Imortant
 <div class="box">
     <p>
-        레드햇 회장</br>
-        콕티에르 OB 회장</br>
+        레드햇 회장<br>
+        콕티에르 OB 회장<br>
         고려대학교 컴퓨터학과 14
     </p>
 </div>
