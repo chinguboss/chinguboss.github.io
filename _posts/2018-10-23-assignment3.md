@@ -32,6 +32,7 @@ Assignment #3
 	<li>사진을 날짜/장소별로 정렬시킬 수 있음</li>
 	<li>사진을 간단하게 편집할 수 있음</li>
 	<li>사진을 바로 SNS에 공유할 수 있음</li>
+	</ol>
 </p> 
 
 ### 3. List major UI requirements
