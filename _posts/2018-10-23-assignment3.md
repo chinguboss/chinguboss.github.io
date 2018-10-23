@@ -27,10 +27,11 @@ Assignment #3
 
 ### 2. List major functional requirement
 <p>
-	1) 앨범의 이름을 정하고, 사진을 넣을 수 있음(앨범 만들기)</br>
-	2) 사진을 날짜/장소별로 정렬시킬 수 있음</br>
-	3) 사진을 간단하게 편집할 수 있음</br>
-	4) 사진을 바로 SNS에 공유할 수 있음</br>
+	<ol>
+	<li>앨범의 이름을 정하고, 사진을 넣을 수 있음(앨범 만들기)</li>
+	<li>사진을 날짜/장소별로 정렬시킬 수 있음</li>
+	<li>사진을 간단하게 편집할 수 있음</li>
+	<li>사진을 바로 SNS에 공유할 수 있음</li>
 </p> 
 
 ### 3. List major UI requirements
