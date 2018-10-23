@@ -66,8 +66,8 @@ Assignment #3
 ## B. User analysis
 ### 1. Conduct user interviews
 
-<iframe src="https://www.youtube.com/watch?v=g_1YcLa2pd0" frameborder="0" allowfullscreen=""></iframe></br>
-<iframe src="https://www.youtube.com/watch?v=0Pcphn_9PLs" frameborder="0" allowfullscreen=""></iframe></br>
+<a href="https://www.youtube.com/watch?v=g_1YcLa2pd0">인터뷰1</a></br>
+<a href="https://www.youtube.com/watch?v=0Pcphn_9PLs">인터뷰2</a></br>
 
 ### 2. List the major direct user requirements
 <p>
