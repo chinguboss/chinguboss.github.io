@@ -1,0 +1,149 @@
+---
+layout: post
+title:  "HW4-1"
+date:   2018-11-13
+excerpt: "인간컴퓨터상호작용 과제입니다."
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>hw-4.1</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="1500" height="1500">
+		
+	</canvas>
+	<script async>
+		var canvas = document.getElementById("myCanvas");
+		var context = canvas.getContext("2d");
+		
+		window.onload = function(){	
+			var pUwindow = {x:20, y:0, width:500, height:500, color:"#456321", title:"windowTitle1"};
+			createWindow(pUwindow);
+
+			var pUbutton = {x:600, y:200, width:200, height:200, color:"#654321", text:"button1"};
+			createButton(pUbutton);
+
+			var pUbutton = {x:800, y:500, width:300, height:200, color:"#621241", text:"button2"};
+			createButton(pUbutton);
+
+			var pUtext = {x:0, y:600, width:200, height:300, color:"#568905", text:"text1"};
+			createText(pUtext);
+
+			var pUmenu = {x:400, y:600, width:200, height:50, color:"#876523", title:"menu", samplenum:3, sampleheight:40, sampletext:"stext"};
+			createMenu(pUmenu);
+		}
+	</script>
+	<script async>
+		function createWindow(pUwindow){
+			var x = pUwindow.x;
+			var y = pUwindow.y;
+			var width = pUwindow.width;
+			var height = pUwindow.height;
+			var color = pUwindow.color;
+			var title = pUwindow.title;
+
+			context.fillStyle = color;
+      		context.fillRect(x, y, width, height);
+      		context.strokeRect(x, y, width, height);
+
+      		context.fillStyle = "green"
+      		context.fillRect(x, y, width, height/6); 
+      		context.fillStyle = "white";
+		    context.textAlign="center";
+		    context.textBaseline = "middle";
+		    context.font = "20px Georgia, serif";
+		    context.fillText(title, x + width/2, y + height/12);
+
+		    var newx = x;
+		    var newy = y;
+		    var newwidth = width/12;
+		    var newheight = width/12;
+
+		    //Delete 버튼
+		    context.fillStyle = "white";
+		    context.fillRect(newx, newy, newwidth, newheight);
+		    context.strokeRect(newx, newy, newwidth, newheight);
+		    //Hide 버튼
+		    context.fillStyle = "white";
+		    context.fillRect(newx+newwidth, newy, newwidth, newheight);
+		    context.strokeRect(newx+newwidth, newy, newwidth, newheight);
+		    //X,-삽입
+		    context.fillStyle = "black";
+		    context.textAlign="center";
+		    context.textBaseline = "middle";
+		    context.font = "20px Georgia";
+		    context.fillText("X", newx + newwidth/2, newy + newheight/2);
+		    context.fillText("ㅡ", newx + 3*newwidth/2, newy + newheight/2);
+		}
+		function createButton(pUbutton){
+      		var x = pUbutton.x;
+      		var y = pUbutton.y;
+      		var width = pUbutton.width;
+      		var height = pUbutton.height;
+      		var color  = pUbutton.color;
+      		var text  = pUbutton.text;
+  
+      		context.fillStyle = color;
+      		context.fillRect(x, y, width, height);
+      		context.strokeRect(x, y, width, height);
+      		context.fillStyle = "black";
+		    context.textAlign="center";
+		    context.textBaseline = "middle";
+		    context.font = "20px Georgia";
+		    context.fillText(text, x + width/2, y + height/2);
+		}
+		function createText(pUtext) {
+			var x = pUtext.x;
+      		var y = pUtext.y;
+      		var width = pUtext.width;
+      		var height = pUtext.height;
+      		var color  = pUtext.color;
+      		var text  = pUtext.text;
+
+			context.fillStyle = color;
+			context.fillRect(x, y, width, height);
+			context.strokeRect(x, y, width, height);
+			context.fillStyle = "white";
+			context.font = "20px Arial";
+			context.textAlign = "center";
+			context.textBaseline = "middle";
+			context.fillText(text, x + width/2, y + height/2);
+		}
+		function createMenu(pUmenu) {
+			var x = pUmenu.x;
+      		var y = pUmenu.y;
+      		var width = pUmenu.width;
+      		var height = pUmenu.height;
+      		var color  = pUmenu.color;
+      		var title  = pUmenu.title;
+      		var samplenum = pUmenu.samplenum;
+      		var sampleheight = pUmenu.sampleheight;
+      		var sampletext = pUmenu.sampletext;
+
+			context.fillStyle = color;
+	        context.fillRect(x, y, width, height);
+	        context.strokeRect(x, y, width, height);
+	        context.fillStyle = "white";
+	        context.font = "20px Arial";
+	        context.textAlign = "center";
+	        context.textBaseline = "middle";
+	        context.fillText(title, x + width/2, y + height/2);
+		        	
+	        for (i = 0; i < samplenum; i++) {
+	        	context.fillStyle = color;
+	        	context.fillRect(x, y + height+sampleheight*i, width, sampleheight);
+	            context.strokeRect(x, y + height+sampleheight*i, width, sampleheight);
+	            context.fillStyle = "white";
+	            context.font = "15px Georgia"
+	            context.textAlign = "center";
+	           	context.textBaseline = "middle";
+	           	context.fillText(sampletext, x+width/2, y+height+((2*i+1)/2*sampleheight));
+	        }
+	    }
+	</script>
+</body>
+</html>
