@@ -11,7 +11,292 @@ Assignment #4
 
 2014190717 권기정 | Human Computer Interaction | 2018.11.02
 
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+	<script src="../jQuery/jquery-1.3.2-vsdoc2.js" type="text/javascript"></script>
+	<script type="text/javascript">
 
+        $(document).ready(function() {
+
+            //[1] 기본값 설정
+            $("#inputarea").show();
+            $("#result").hide(); //more...숨기기
+
+           
+
+            //[2] submit클릭시 보이기 및 숨기기
+
+            $("#window").click(function() {
+
+
+                $("#result").show();
+
+                $(this).hide();//more버튼 숨기기
+                $("#inputarea").hide();
+            });
+
+        });
+
+    </script>
+    <script language="javascript">
+			function submit(){
+			var refirstname = document.getElementById("firstname").value;
+			var remiddlename = document.getElementById("middlename").value;
+			var relastname = document.getElementById("lastname").value;
+			var rephone = document.getElementById("phone").value;
+			var rehome = document.getElementById("home").value;
+			var readdress = document.getElementById("address").value;
+			var regoal = document.getElementById("goal").value;
+			var educationlength = $('#education tbody tr').length;
+			var experiencelength = $('#experience tbody tr').length;
+			var skilllength = $('#skill tbody tr').length;
+					
+			var reeducation="";
+			for(i = 1; i < educationlength+1; i++){
+				var tschool = "school" + i;
+				reeducation +=  document.getElementById(tschool).value;
+				var tmajor = "major" + i;
+				reeducation += document.getElementById(tmajor).value;
+				var tduration1 = "duration1" + i;
+				reeducation +=  "  ("+document.getElementById(tduration1).value;
+				var tduration2 = "duration2" + i;
+				reeducation +=  "~"+document.getElementById(tduration2).value;
+				reeducation += "<br>";
+			}
+					
+			var reexperience="";
+			for(i = 1; i < experiencelength+1; i++){
+				var torganization = "organization" + i;
+				reexperience +=  document.getElementById(torganization).value+" ";
+				var tduty = "duty" + i;
+				reexperience += document.getElementById(tduty).value;
+				var texduration1 = "exduration1" + i;
+				reexperience +=  "  ("+document.getElementById(tduration1).value;
+				var texduration2 = "exduration2" + i;
+				reexperience +=  "~"+document.getElementById(tduration2).value+")";
+				reexperience += "<br>";
+			}
+			var reskill="";
+			for(i = 1; i < skilllength+1; i++){
+				var tskillname = "skillname" + i;
+				reskill +=  document.getElementById(tskillname).value;
+				var tlevel = "level" + i;
+				reskill += " - "+document.getElementById(tlevel).value;
+				var tskillduration = "skillduration" + i;
+				reskill +=  "  ("+document.getElementById(tskillduration).value+")";
+				reskill += "<br>";
+			}
+			document.getElementById("resultname").innerHTML = relastname+" "+remiddlename+" "+refirstname;
+			document.getElementById("resultphone").innerHTML = rephone; 
+			document.getElementById("resulthome").innerHTML = rehome; 
+			document.getElementById("resultaddress").innerHTML = readdress;
+			document.getElementById("resultgoal").innerHTML = regoal;
+			document.getElementById("resulteducation").innerHTML = reeducation;
+			document.getElementById("resultexperience").innerHTML = reexperience;
+			document.getElementById("resultskill").innerHTML = reskill;
+			}
+		</script>
+</head>
+<body>
+		
+	<div id="inputarea">
+
+		<fieldset id="name">
+			<legend>1. Your name</legend>
+				Input your first name : <input type="text" id="firstname" value="" /></br>
+				Input your middle name : <input type="text" id="middlename"value="" placeholder="없으시면 입력 안하셔도 됩니다."/></br>
+				Input your last name : <input type="text" id="lastname" value="" /></br>
+		</fieldset>
+
+
+
+		<fieldset id="image">
+			<legend>2. Image</legend>
+				Upload file</br>
+				<input type="file" id="myimage" value="" />
+		</fieldset>
+
+
+		<fieldset id="information">
+			<legend>3. Your information</legend>
+				Input your address : <input type="text" id="address"/></br>
+				Input your 핸드폰번호 : <input type="tel" id="phone" placeholder="000*-0000*-0000" pattern="[0-9]{3}-[0,9]{3,4}-[0,9]{4}"/></br>
+				Input your 집전화번호 : <input type="tel" id="home" placeholder="00*-0000*-0000" pattern="[0-9]{2}-[0,9]{3,4}-[0,9]{4}"/></br>
+		</fieldset>
+
+		<fieldset id="career">
+			<legend>4. Career goal/objective</legend>
+				<textarea id="goal" cols="60" rows="10" placeholder="목표를 입력하세요!"></textarea></br>
+		</fieldset>
+
+		<fieldset id="education">
+			<legend>5. Education</legend>
+
+			<input type="button" id="eduadd" onclick="eduadd1();" value="추가"/>
+			<input type="button" id="edurem" onclick="edurem1();" value="삭제"/>
+			<script>
+					function eduadd1() {
+						var eduelementn = $('#education1 tbody tr').length;
+						eduelementn++;
+						var eduelement = "<tr>";
+						eduelement += "<td><input type=\"text\" id=\"school\" size=\"20\"/></td>";
+						eduelement += eduelementn;
+						eduelement += "<td><input type=\"text\" id=\"major\" size=\"20\"/></td>";
+						eduelement += eduelementn;
+						eduelement += "<td><input type=\"date\" id=\"duration1\"/>~<input type=\"date\" id=\"duration2\"/></td>";
+						eduelement += eduelementn;
+						eduelement += "</tr>";
+						$('#education1').append(eduelement);
+					}
+					function edurem1(){
+						if( $('#education1 tbody tr').length >1){ 
+							$('#education1 tr:last').remove();
+						}
+						else{
+							alert('최소한 하나는 입력해야 합니다!');
+						}
+					}
+			</script>
+				<table id="education1">
+					<thead>
+						<td>학교</td>
+						<td>전공</td>
+						<td>재학기간</td>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" id="school" size="20"/></td>
+							<td><input type="text" id="major" size="20"/></td>
+							<td><input type="date" id="duration1"/>~<input type="date" id="duration2"/></td>
+						</tr>
+					</tbody>
+				</table>
+		</fieldset>
+
+		<fieldset id="experience">
+			<legend>6. Experience</legend>
+				대외활동/학내 활동 내역을 적으세요</br>
+			<input type="button" id="expadd" onclick="expadd1();" value="추가"/>
+			<input type="button" id="exprem" onclick="exprem1();" value="삭제"/>
+			<script>
+					function expadd1() {
+						var expelementn = $('#experience1 tbody tr').length;
+						expelementn++;
+						var expelement = "<tr>";
+						expelement += "<td><input type=\"text\" id=\"organization\" size=\"20\"/></td>";
+						expelement += expelementn;
+						expelement += "<td><input type=\"text\" id=\"duty\" size=\"20\"/></td>";
+						expelement += expelementn;
+						expelement += "<td><input type=\"date\" id=\"exduration1\"/>~<input type=\"date\" id=\"exduration2\"/></td>";
+						expelement += expelementn;
+						expelement += "</tr>";
+						$('#experience1').append(expelement);
+					}
+					function exprem1(){
+						if( $('#experience1 tbody tr').length >1){ 
+							$('#experience1 tr:last').remove();
+						}
+						else{
+							alert('최소한 하나는 입력해야 합니다!');
+						}
+					}
+			</script>	
+				<table id="experience1">
+					<thead>
+						<td>활동이름</td>
+						<td>직책</td>
+						<td>기간</td>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" id="organization" size="20"/></td>
+							<td><input type="text" id="duty" size="20"/></td>
+							<td><input type="date" id="exduration1"/>~<input type="date" id="exduration2"/></td>
+						</tr>
+					</tbody>
+				</table>
+		</fieldset>
+
+		<fieldset id="skill">
+			<legend>7. Skill</legend>
+			<input type="button" id="skilladd" onclick="skilladd1();" value="추가"/>
+			<input type="button" id="skillrem" onclick="skillrem1();" value="삭제"/>
+			<script>
+					function skilladd1() {
+						var skillelementn = $('#skill1 tbody tr').length;
+						skillelementn++;
+						var skillelement = "<tr>";
+						skillelement += "<td><input type=\"text\" id=\"skillname\" size=\"20\"/></td>";
+						skillelement += skillelementn;
+						skillelement += "<td><input type=\"text\" id=\"level\" size=\"20\"/></td>";
+						skillelement += skillelementn;
+						skillelement += "<td><input type=\"date\" id=\"skillduration\"/></td>";
+						skillelement += skillelementn;
+						skillelement += "</tr>";
+						$('#skill1').append(skillelement);
+					}
+					function skillrem1(){
+						$('#skill1 tr:last').remove();
+					}
+			</script>
+				<table id="skill1">
+					<thead>
+						<td>자격증이름</td>
+						<td>단계</td>
+						<td>딴날짜</td>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" id="skillname" size="20" value=""/></td>
+							<td><input type="text" id="level" size="20" value=""/></td>
+							<td><input type="date" id="skillduration" value=""/></td>
+						</tr>
+					</tbody>
+				</table>
+		</fieldset>
+
+		<input type="button" id="submit" onclick="submit();" value="입력완료"/>
+		<input type="button" id="window" value="적용화면보기"/>
+
+	</div>
+	<section id="result" style="width: 70%; border: 3px solid black; margin: 40px auto;  height: 0px; width: 600px;">
+		<div style="text-align: center;">
+			<h3>Resume</h3>
+			<hr>
+		</div>
+		<div style="display:inline-block">
+			<div style="float: left;">
+				<strong><u><p id="resultname" style="margin: 1px">이름</p></u></strong>
+				<span><STRONG>&nbsp; Information: </STRONG></span><br>
+				<span>&nbsp; 핸드폰번호 : </span><span id="resultphone">핸드폰번호</span><br>
+				<span>&nbsp; 집전화번호 : </span><span id="resulthome">집전화번호</span><br>
+				<span>&nbsp; 주소 : </span><span id="resultaddress">주소</span><br>
+			</div>
+		</div>
+			<hr>
+			<span>&nbsp; Career Goal/Objective</span><br>
+			<p id="resultgoal">장래 목표</p>
+			<hr>
+			<span>&nbsp; Education </span>
+			<p id="resulteducation">학력</p>
+			<hr>
+			<span>&nbsp; Experience </span>
+			<p id="resultexperience">대외활동</p>
+			<hr>
+			<span>&nbsp; Skill </span>
+			<p id="resultskill">자격증</p>
+			<hr>
+
+	</section>
+
+
+
+</body>
+</html>
 
 
  
