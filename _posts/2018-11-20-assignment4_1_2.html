@@ -80,17 +80,17 @@ excerpt: "인간컴퓨터상호작용 과제입니다."
     function init_tree(){ // Factory
         var tree1 = new Tree();
         // 루트 노드 추가
-        tree1.root("root", "tree1")
+        tree1.root("root", "청와대")
         // 하부 노드 추가
-        tree1.anode( new Tree( "menu1", "메뉴1" ) );
-        tree1.anode( new Tree( "menu2", "메뉴2" ) );
-        tree1.anode( new Tree( "menu3", "메뉴3" ) );
+        tree1.anode( new Tree( "gover1", "기획재정부" ) );
+        tree1.anode( new Tree( "gover2", "국방부" ) );
+        tree1.anode( new Tree( "gover3", "농림수산식품부" ) );
         tree1.visible = true;
         // 하부 노드의 하부 노드 추가
-        var menu3 = tree1.node["menu3"];
-        menu3.anode( new Tree( "menu3_1", "속메뉴 1" ) );
-        menu3.anode( new Tree( "menu3_2", "속메뉴 2" ) );
-        menu3.anode( new Tree( "menu3_6", "속메뉴 2325" ) );
+        var menu3 = tree1.node["gover3"];
+        menu3.anode( new Tree( "gover3_1", "청1" ) );
+        menu3.anode( new Tree( "gover3_2", "청2" ) );
+        menu3.anode( new Tree( "gover3_3", "청3" ) );
         menu3.visible = true;
 
         return tree1;
