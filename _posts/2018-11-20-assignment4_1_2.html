@@ -1,0 +1,123 @@
+---
+layout: post
+title:  "HW4.1.2"
+date:   2018-11-20
+excerpt: "인간컴퓨터상호작용 과제입니다."
+---
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>assignment 4.1.2</title>
+</head>
+<body>
+    <canvas id="canvas" width="1500" height="1500"></canvas>
+
+    <script type="text/javascript">
+    // 생성자
+    Tree = function( tree_id, label ){
+        this.tree_id = tree_id;
+        this.label = label;
+        this.visible = false;
+        this.node = new Array();
+        this.node_count = 0;
+    }
+    //root 노드 추가
+    Tree.prototype.root = function( root_id, root_label ){
+        this.tree_id = root_id;
+        this.label = root_label;
+    }
+    // 노드 추가
+    Tree.prototype.anode = function( tree ) {
+        this.node[tree.tree_id] = tree;
+        this.node_count++;
+    }
+    // 노드 삭제
+    Tree.prototype.dnode = function( node_id ) {
+        delete this.node[node_id];
+        this.node_count--;
+    }
+    // 노드 검색
+    Tree.prototype.search = function ( node_id ){
+        if (this.tree_id == node_id) {
+            return this;
+        }else return null;
+    }
+    // 화면 출력
+    Tree.prototype.print = function(x, y, color){
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        //사각형
+        context.fillStyle=color;
+        context.fillRect(x,y,160,90);
+        context.strokeRect(x,y,160,90);
+        //안에들어갈글자
+        context.fillStyle = "white";
+        context.font = "10px Arial";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(this.label, x + 80, y + 45);
+
+        //연결선
+        if( this.node_count > 0 ){
+            var num=0;
+            for( var node_id in this.node ){
+                num++;
+                node = this.node[node_id];
+
+                context.moveTo(x + 80, y + 90);
+                context.lineTo(x + 80 - 160 +(num-1)*240, y+180);
+                context.stroke();
+
+                node.print( x - 400 + num*240, y+180, color);
+            }
+        }
+    }
+
+    //트리그려보자아아아아아ㅏㅏㅏ
+    function init_tree(){ // Factory
+        var tree1 = new Tree();
+        // 루트 노드 추가
+        tree1.root("root", "tree1")
+        // 하부 노드 추가
+        tree1.anode( new Tree( "menu1", "메뉴1" ) );
+        tree1.anode( new Tree( "menu2", "메뉴2" ) );
+        tree1.anode( new Tree( "menu3", "메뉴3" ) );
+        tree1.visible = true;
+        // 하부 노드의 하부 노드 추가
+        var menu3 = tree1.node["menu3"];
+        menu3.anode( new Tree( "menu3_1", "속메뉴 1" ) );
+        menu3.anode( new Tree( "menu3_2", "속메뉴 2" ) );
+        menu3.anode( new Tree( "menu3_6", "속메뉴 2325" ) );
+        menu3.visible = true;
+
+        return tree1;
+    }
+    function init_tree2(){ // Factory
+        var tree2 = new Tree();
+        // 루트 노드 추가
+        tree1.root("root2", "구기종목")
+        // 하부 노드 추가
+        tree1.anode( new Tree( "bsport1", "축구" ) );
+        tree1.anode( new Tree( "bsport2", "농구" ) );
+        tree1.anode( new Tree( "bsport3", "야구" ) );
+        tree1.visible = true;
+        // 하부 노드의 하부 노드 추가
+        var bsport1 = tree2.node["bsport1"];
+        menu3.anode( new Tree( "bsport1_1", "EPL" ) );
+        menu3.anode( new Tree( "bsport1_2", "La Liga" ) );
+        menu3.anode( new Tree( "bsport1_3", "K-League" ) );
+        menu3.visible = true;
+
+        return tree2;
+    }
+    var tree1 = init_tree();
+    var tree2 = init_tree();
+    tree1.print( 300, 0, "red" );
+    tree2.print( 400, 500, "#456321" );
+    </script>
+
+</body>
+</html>
