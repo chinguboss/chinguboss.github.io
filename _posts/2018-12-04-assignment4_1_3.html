@@ -1,0 +1,107 @@
+---
+layout: post
+title:  "HW4.1.3"
+date:   2018-12-04
+excerpt: "인간컴퓨터상호작용 과제입니다."
+---
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>assignment 4.1.3</title>
+</head>
+    <canvas id="canvas1" width="1500" height="1500"></canvas>
+    <canvas id="canvas2" width="1500" height="1500"></canvas>
+     <script type="text/javascript">
+    // 생성자
+    Tree = function( tree_id, label ){
+        this.tree_id = tree_id;
+        this.label = label;
+        this.node = new Array();
+        this.node_count = 0;
+    }
+    //root 노드 추가
+    Tree.prototype.root = function( root_id, root_label ){
+        this.tree_id = root_id;
+        this.label = root_label;
+    }
+    // 노드 추가
+    Tree.prototype.anode = function( tree ) {
+        this.node[tree.tree_id] = tree;
+        this.node_count++;
+    }
+    // 노드 삭제
+    Tree.prototype.dnode = function( node_id ) {
+        delete this.node[node_id];
+        this.node_count--;
+    }
+    // 노드 검색
+    Tree.prototype.search = function ( node_id ){
+        if (this.tree_id == node_id) {
+            return this;
+        }else return null;
+    }
+
+        pUwindow = function(label) {
+          this.label=label;
+          this.tree = new Tree(label,label+"origin");
+          
+        }
+        pUwindow.prototype.createWindow= function(x, y, width, height, color){
+          var canvas = document.getElementById("canvas1");
+          var context = canvas.getContext("2d");
+
+          context.beginPath();
+          context.rect(x,y, width, height);
+          context.fillStyle=color;
+          context.fillRect(x, y, width, height);
+
+          context.moveTo(x, y + 45);
+          context.lineTo(x + width, y + 45);
+          context.stroke();
+          context.closePath();
+
+          context.beginPath();
+          context.fillStyle="black";
+          context.font = "20pt Arial";
+          context.textAlign = "center";
+          context.fillText(this.label, x + width/2, y + 30);
+          context.closePath();
+
+          context.beginPath();
+          context.lineWidth=1.5;
+          context.strokeStyle="black";
+          context.fillStyle="white"; 
+          context.fillRect(x + width/50 + 30, y + width/50, 20, 20);
+          context.moveTo(x + width/50 + 30 , y + width/50 + 10);
+          context.lineTo(x + width/50 + 50, y + width/50 + 10);
+          context.stroke();
+          context.closePath();
+          this.tree.anode( new Tree(this.tree.tree_id+"_button -",this.tree.tree_id+"_button -") );
+    
+          context.beginPath();
+          context.lineWidth=1.5;
+          context.strokeStyle="black";
+          context.fillStyle="blue"; 
+          context.fillRect(x + width/50, y + width/50, 20, 20);
+          context.moveTo(x + width/50, y + width/50);
+          context.lineTo(x + width/50 + 20, y + width/50 + 20);
+          context.moveTo(x + width/50, y + width/50 + 20);
+          context.lineTo(x + width/50 + 20, y + width/50);
+          context.stroke();
+          context.closePath();
+          this.tree.anode( new Tree(this.tree.tree_id+"_button X",this.tree.tree_id+"_button X") );
+        }    
+
+
+    var window1 = new pUwindow("window1");
+    window1.createWindow(100, 100, 400, 400, "#123456");
+    var window2 = new pUwindow("window2");
+    window2.createWindow(600, 100, 400, 400, "#657421");
+    var window3 = new pUwindow("window3");
+    window3.createWindow(100, 600, 400, 400, "green");
+    </script>
+   
+</body>
+</html>
