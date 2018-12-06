@@ -11,9 +11,11 @@ excerpt: "인간컴퓨터상호작용 과제입니다."
     <meta charset="utf-8">
     <title>assignment 4.1.3</title>
 </head>
-    <canvas id="canvas1" width="1500" height="1500"></canvas>
-    <canvas id="canvas2" width="1500" height="1500"></canvas>
+    <canvas id="canvas1" style="border : 1px solid black" width="1500" height="1500"></canvas>
      <script type="text/javascript">
+    windowsn=0;
+    windows = new Array();
+    prior = 0;     
     // 생성자
     Tree = function( tree_id, label ){
         this.tree_id = tree_id;
@@ -51,6 +53,14 @@ excerpt: "인간컴퓨터상호작용 과제입니다."
         pUwindow.prototype.createWindow= function(x, y, width, height, color){
           var canvas = document.getElementById("canvas1");
           var context = canvas.getContext("2d");
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+          windows[windowsn] = this;
+          windowsn++;
+          this.tree.priority = prior;
+          prior++;
 
           context.beginPath();
           context.rect(x,y, width, height);
@@ -78,7 +88,6 @@ excerpt: "인간컴퓨터상호작용 과제입니다."
           context.lineTo(x + width/50 + 50, y + width/50 + 10);
           context.stroke();
           context.closePath();
-          this.tree.anode( new Tree(this.tree.tree_id+"_button -",this.tree.tree_id+"_button -") );
     
           context.beginPath();
           context.lineWidth=1.5;
@@ -91,7 +100,6 @@ excerpt: "인간컴퓨터상호작용 과제입니다."
           context.lineTo(x + width/50 + 20, y + width/50);
           context.stroke();
           context.closePath();
-          this.tree.anode( new Tree(this.tree.tree_id+"_button X",this.tree.tree_id+"_button X") );
         }    
 
 
@@ -101,6 +109,41 @@ excerpt: "인간컴퓨터상호작용 과제입니다."
     window2.createWindow(600, 100, 400, 400, "#657421");
     var window3 = new pUwindow("window3");
     window3.createWindow(100, 600, 400, 400, "green");
+         
+    window.onload = function(){
+      canvas = document.getElementById("canvas1");
+      context = canvas.getContext("2d");
+      canvas.onmousedown = onmousedown;
+    }
+    function onmousedown(e) {
+        e.preventDefault();
+        e.stopPropagation();
+                mx = e.layerX;
+                my = e.layerY;
+          locate(mx,my);
+    }
+        function locate(mx, my){
+          var maxPrio = -1;
+          var max=0;
+          for(i=0;i<windowsn;i++){
+            var windowx = windows[i].x + windows[i].width;
+            var windowy = windows[i].y + windows[i].height;
+            if( windowx > mx && mx > windows[i].x && windowy > my && my > windows[i].y){
+              if(maxPrio < windows[i].tree.priority ){
+                maxPrio = windows[i].tree.priority;
+                max=i;
+              }
+            }
+          }
+          if(maxPrio == -1){
+            result = "다시 찍으세요!";
+            alert(result);
+          }
+          else{
+            result = UIobject[max].tree.label;
+            alert(result);
+          }
+        }     
     </script>
    
 </body>
